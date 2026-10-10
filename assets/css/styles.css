@@ -581,6 +581,26 @@ p { margin: 0 0 1rem; }
 .wa-float:hover { transform: scale(1.08); color: #fff; }
 .wa-float svg { width: 30px; height: 30px; }
 
+/* ---------- Floating Instagram ---------- */
+.wa-instagram {
+  position: fixed; right: 1.1rem; bottom: 1.8rem; z-index: 900;
+  width: 56px; height: 56px; border-radius: 50%; background: #E4405F; color: #fff;
+  display: grid; place-items: center; box-shadow: 0 10px 30px rgba(226,64,95,.4);
+  transition: transform .25s var(--ease);
+}
+.wa-instagram:hover { transform: scale(1.08); color: #fff; }
+.wa-instagram svg { width: 30px; height: 30px; }
+
+/* ---------- Floating Facebook ---------- */
+.wa-facebook {
+  position: fixed; right: 1.1rem; bottom: 2.5rem; z-index: 900;
+  width: 56px; height: 56px; border-radius: 50%; background: #4267B2; color: #fff;
+  display: grid; place-items: center; box-shadow: 0 10px 30px rgba(66,103,178,.4);
+  transition: transform .25s var(--ease);
+}
+.wa-facebook:hover { transform: scale(1.08); color: #fff; }
+.wa-facebook svg { width: 30px; height: 30px; }
+
 /* ---------- Reveal animation ---------- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .reveal.in { opacity: 1; transform: none; }
