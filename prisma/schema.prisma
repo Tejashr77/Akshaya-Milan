@@ -1,0 +1,95 @@
+generator client {
+  provider = "@prisma/client"
+  binaryTargets = ["native@>=5.0.0"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id          Int          @id @default(autoincrement)
+  inquiryId   String       @unique
+  name        String
+  phone       String
+  email       String
+  eventType   String
+  eventDate   DateTime
+  guestCount  Int
+  venuePreference String?
+  budgetRange String?
+  services    Json?
+  message     String?
+  leadStatus  String       @default("New")
+  priority    String       @default("Normal")
+  leadSource  String       @default("Website")
+  landingPage String?
+  assignedTo  String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  
+  @@updatedAt(name = "updatedAt")
+}
+
+model Customer {
+  id          Int          @id @default(autoincrement)
+  name        String
+  phone       String
+  email       String
+  linkedEnquiries Lead[]       @relation("LeadCustomer", fields: [email], references: [email])
+  notes       String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Booking {
+  id          Int          @id @default(autoincrement)
+  leadId      Int          @unique
+  lead        Lead         @relation(fields: [leadId], references: [id])
+  eventType   String
+  eventDate   DateTime
+  venue       String
+  quotedAmount Decimal?
+  agreedAmount Decimal?
+  paymentStatus String       @default("Pending")
+  bookingStatus String     @default("Pending")
+  depositPaid   Boolean      @default(false)
+  balance       Decimal?
+  paymentReference String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model FollowUp {
+  id          Int          @id @default(autoincrement)
+  leadId      Int
+  lead        Lead         @relation(fields: [leadId], references: [id])
+  assignedTo  String
+  followUpDate DateTime
+  notes       String
+  completed   Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+}
+
+model ActivityLog {
+  id          Int          @id @default(autoincrement)
+  user        String
+  action      String
+  recordId    Int
+  recordType  String
+  createdAt   DateTime     @default(now())
+}
+
+model WebsiteAnalytics {
+  id           Int          @id @default(autoincrement)
+  sessionId    String
+  pageUrl      String
+  referrer     String
+  campaignSource String?
+  campaignMedium String?
+  campaignName String?
+  eventName    String?
+  timestamp    DateTime     @default(now())
+  consent      Boolean      @default(false)
+}
