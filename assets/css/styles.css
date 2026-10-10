@@ -584,10 +584,10 @@ p { margin: 0 0 1rem; }
   color: #0B0B0F;
 }
 .wa-float:hover { transform: scale(1.08); color: #0B0B0F; }
-.wa-float svg { width: 30px; height: 30px; }
+.wa-float svg { width: 30px; height: 30px; display: block; }
 
 /* ---------- Floating Social Row ---------- */
-.wa-row { position: absolute; right: 1.1rem; bottom: 1.1rem; display: flex; gap: .8rem; align-items: center; }
+.wa-row { position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 999; display: flex; gap: .8rem; align-items: center; }
 .wa-row .wa-float { flex: 0 0 auto; }
 
 /* ---------- Reveal animation ---------- */
